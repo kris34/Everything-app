@@ -6,11 +6,13 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minLength: [5, 'Username has to be at least 5 charakters long!'],
+    unique: true,
   },
   email: {
     type: string,
     required: 'Email is required',
     validate: [isEmail, 'Invalid Email'],
+    unique: true,
   },
   password: {
     type: String,
