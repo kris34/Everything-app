@@ -3,7 +3,7 @@ const { setCors } = require('./config/cors.js');
 const { startMongo } = require('./config/mongo');
 const cookieParser = require('cookie-parser');
 const router = require('./router.js');
-const port = '3000';
+const port = '3001';
 const app = express();
 
 start();
