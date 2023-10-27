@@ -9,9 +9,8 @@ const app = express();
 start();
 
 async function start() {
-  app.use(setCors());
   await startMongo();
-
+  app.use(setCors());
   app.use(cookieParser());
   app.use(express.json());
   app.use(router);

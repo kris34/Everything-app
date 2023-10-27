@@ -1,11 +1,13 @@
 const { register } = require('../services/user');
+const trimmer = require('../shared/trimmer');
 
 const userController = require('express').Router();
 
-userController.post('/user-create', async (req, res) => {
+userController.post('/create-account', async (req, res) => {
   try {
-    const data = req.body;
+   
 
+    let data = trimmer(req.body);
     const registeredUser = await register(data);
 
     res.status(200).json(registeredUser);
