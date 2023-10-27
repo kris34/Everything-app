@@ -16,12 +16,11 @@ schema
   .spaces() // Should not have spaces
   .is()
   .not()
-  .oneOf(['Passw0rd', 'Password123'])
+  .oneOf(['Passw0rd', 'Password123']) //should not be one of the listed values
   .has()
-  .symbols(1);
+  .symbols(1); //should have at least 1 special symbol
 
 const validatePass = (pass) => {
-  console.log(pass);
   return schema.validate(pass);
 };
 

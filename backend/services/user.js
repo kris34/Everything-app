@@ -8,6 +8,7 @@ const register = async (data) => {
     throw new Error("Passwords don't match");
   }
 
+  data.password = await bcrypt.hash(data.password, 10);
   const user = await User.create(data);
 
   return createToken(user);
