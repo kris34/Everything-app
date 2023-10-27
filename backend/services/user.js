@@ -8,8 +8,6 @@ const register = async (data) => {
     throw new Error("Passwords don't match");
   }
 
-  
-
   const user = await User.create(data);
 
   return createToken(user);

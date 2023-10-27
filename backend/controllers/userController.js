@@ -1,5 +1,5 @@
 const { register } = require('../services/user');
-const trimmer = require('../shared/trimmer');
+const trimmer = require('../util/trimmer');
 
 const userController = require('express').Router();
 

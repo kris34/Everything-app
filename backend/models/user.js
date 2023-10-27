@@ -1,5 +1,6 @@
 const { model, Schema, Types } = require('mongoose');
 const { isEmail } = require('validator');
+const UPPERCASE_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/;
 
 const userSchema = new Schema({
   username: {
@@ -12,12 +13,19 @@ const userSchema = new Schema({
     type: String,
     required: 'Email is required',
     validate: [isEmail, 'Invalid Email'],
+
     unique: true,
   },
   password: {
     type: String,
     required: true,
     minLength: [5, 'Password must be at least 5 charakters long!'],
+    validate: {
+      validator: function (v) {
+        return UPPERCASE_REGEX.test(v);
+      },
+      message: (props) => `${props.value} invalid password!`,
+    },
   },
 });
 
