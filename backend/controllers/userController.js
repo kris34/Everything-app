@@ -1,7 +1,7 @@
 const { register } = require('../services/user');
-const sendMail = require('../util/emailer');
-const validatePass = require('../util/passValidator');
-const trimmer = require('../util/trimmer');
+const sendMail = require('../util/emailerService');
+const validatePass = require('../util/passValidatorService');
+const trimmer = require('../util/trimmerService');
 
 const userController = require('express').Router();
 
@@ -15,8 +15,8 @@ userController.post('/create-account', async (req, res) => {
 
     const emailData = {
       email: data.email,
-      subject: 'Profile confirmation',
-      text: 'Please confirm your profile here',
+      subject: 'Welcome to the Everything App',
+      text: `Thanks for joining our awesome community, ${data.username}!`,
     };
 
     sendMail(emailData);
@@ -25,6 +25,10 @@ userController.post('/create-account', async (req, res) => {
   } catch (error) {
     res.status(400).json({ err: error.message });
   }
+});
+
+userController.post('/login', async (req, res) => {
+  res.json('here')
 });
 
 module.exports = userController;
