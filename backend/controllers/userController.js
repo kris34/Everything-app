@@ -1,4 +1,4 @@
-const { register } = require('../services/user');
+const { register, login } = require('../services/user');
 const sendMail = require('../util/emailerService');
 const validatePass = require('../util/passValidatorService');
 const trimmer = require('../util/trimmerService');
@@ -28,7 +28,13 @@ userController.post('/create-account', async (req, res) => {
 });
 
 userController.post('/login', async (req, res) => {
-  res.json('here')
+  try {
+    const logged = await login(req.body);
+
+    res.status(200).json(logged)
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 });
 
 module.exports = userController;

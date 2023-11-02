@@ -15,16 +15,23 @@ const register = async (data) => {
 };
 
 const login = async (data) => {
-  const user = await User.findById(data.email);
 
-  if (!user) {
-    throw new Error('Invalid user!');
-  }
+  const user = await User.findOne({email: data.email});
+ 
+  try {
+    if (!user) {
+      throw new Error('Invalid user!');
+    }
 
-  if (bcrypt.compare(data.password, user.password)) {
-    const loggedIn = createToken(user);
-  } else {
-    throw new Error('Wrong username or password!');
+    const verified = bcrypt.compare(data.password, user.password);
+
+    if (!verified) {
+      throw new Error('Wrong username or password');
+    }
+
+    return createToken(user);
+  } catch (err) {
+    throw new Error(err);
   }
 };
 
